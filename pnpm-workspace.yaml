@@ -1,2 +1,8 @@
 packages:
+  - 'apps/*'
   - 'packages/*'
+allowBuilds:
+  '@swc/core': true
+  msgpackr-extract: false
+  nx: true
+nodeLinker: hoisted
