@@ -1,5 +1,6 @@
+import { useClerk } from '@clerk/expo';
 import * as Device from 'expo-device';
-import { Platform, StyleSheet } from 'react-native';
+import { Platform, Pressable, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { AnimatedIcon } from '@/components/animated-icon';
@@ -29,6 +30,8 @@ function getDevMenuHint() {
 }
 
 export default function HomeScreen() {
+  const { signOut } = useClerk();
+
   return (
     <ThemedView style={styles.container}>
       <SafeAreaView style={styles.safeArea}>
@@ -56,6 +59,12 @@ export default function HomeScreen() {
         </ThemedView>
 
         {Platform.OS === 'web' && <WebBadge />}
+
+        <Pressable
+          style={({ pressed }) => [styles.signOutButton, pressed && styles.signOutPressed]}
+          onPress={() => signOut()}>
+          <ThemedText style={styles.signOutText}>Sign Out</ThemedText>
+        </Pressable>
       </SafeAreaView>
     </ThemedView>
   );
@@ -94,5 +103,21 @@ const styles = StyleSheet.create({
     paddingHorizontal: Spacing.three,
     paddingVertical: Spacing.four,
     borderRadius: Spacing.four,
+  },
+  signOutButton: {
+    paddingHorizontal: Spacing.four,
+    paddingVertical: Spacing.two,
+    borderRadius: Spacing.two,
+    borderWidth: 1,
+    borderColor: '#ef4444',
+    alignSelf: 'center',
+  },
+  signOutPressed: {
+    opacity: 0.7,
+  },
+  signOutText: {
+    color: '#ef4444',
+    fontSize: 14,
+    fontWeight: '600',
   },
 });

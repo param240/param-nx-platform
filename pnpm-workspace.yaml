@@ -2,7 +2,13 @@ packages:
   - 'apps/*'
   - 'packages/*'
 allowBuilds:
+  '@clerk/shared': true
   '@swc/core': true
+  browser-tabs-lock: true
+  bufferutil: true
+  core-js: true
   msgpackr-extract: false
   nx: true
+  utf-8-validate: true
 nodeLinker: hoisted
+blockExoticSubdeps: false

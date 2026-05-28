@@ -3,6 +3,7 @@
   "main": "expo-router/entry",
   "version": "1.0.0",
   "dependencies": {
+    "@clerk/expo": "*",
     "@expo/ui": "*",
     "expo-constants": "*",
     "expo-device": "*",
@@ -11,6 +12,7 @@
     "expo-image": "*",
     "expo-linking": "*",
     "expo-router": "*",
+    "expo-secure-store": "*",
     "expo-splash-screen": "*",
     "expo-status-bar": "*",
     "expo-symbols": "*",
