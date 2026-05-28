@@ -9,7 +9,7 @@ importers:
   .:
     dependencies:
       '@clerk/expo':
-        specifier: ^3.2.16
+        specifier: 3.2.16
         version: 3.2.16(@solana/web3.js@1.98.4(bufferutil@4.1.0)(typescript@6.0.3)(utf-8-validate@6.0.6))(@types/react@19.2.2)(bs58@6.0.0)(bufferutil@4.1.0)(expo-constants@56.0.16)(expo-secure-store@56.0.4(expo@56.0.5))(expo-web-browser@56.0.5(expo@56.0.5)(react-native@0.85.3(@babel/core@7.29.7)(@react-native/metro-config@0.85.3(@babel/core@7.29.7))(@types/react@19.2.2)(bufferutil@4.1.0)(react@19.2.3)(utf-8-validate@6.0.6)))(expo@56.0.5)(react-dom@19.2.3(react@19.2.3))(react-native@0.85.3(@babel/core@7.29.7)(@react-native/metro-config@0.85.3(@babel/core@7.29.7))(@types/react@19.2.2)(bufferutil@4.1.0)(react@19.2.3)(utf-8-validate@6.0.6))(react@19.2.3)(typescript@6.0.3)(utf-8-validate@6.0.6)(zod@3.25.76)
       '@expo/ui':
         specifier: 56.0.14
@@ -36,7 +36,7 @@ importers:
         specifier: 56.2.7
         version: 56.2.7(f9b32f2fcba8d4183e274b0e350a1d10)
       expo-secure-store:
-        specifier: ^56.0.4
+        specifier: 56.0.4
         version: 56.0.4(expo@56.0.5)
       expo-splash-screen:
         specifier: 56.0.10
