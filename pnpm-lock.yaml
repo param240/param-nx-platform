@@ -102,6 +102,9 @@ importers:
       prettier:
         specifier: 3.8.1
         version: 3.8.1
+      reactotron-react-native:
+        specifier: ^5.2.0
+        version: 5.2.0(react-native@0.85.3(@babel/core@7.29.7)(@react-native/metro-config@0.85.3(@babel/core@7.29.7))(@types/react@19.2.2)(bufferutil@4.1.0)(react@19.2.3)(utf-8-validate@6.0.6))
       tslib:
         specifier: ^2.3.0
         version: 2.8.1
@@ -187,6 +190,9 @@ importers:
       '@types/react':
         specifier: '*'
         version: 19.2.15
+      reactotron-react-native:
+        specifier: '*'
+        version: 5.2.0(react-native@0.85.3(@babel/core@7.29.7)(@react-native/metro-config@0.85.3(@babel/core@7.29.7))(@types/react@19.2.15)(bufferutil@4.1.0)(react@19.2.3)(utf-8-validate@6.0.6))
       typescript:
         specifier: '*'
         version: 6.0.3
@@ -3457,6 +3463,9 @@ packages:
     resolution: {integrity: sha512-tEBHqDnIoM/1rXME1zgka9g6Q2lcoCkxHLuc7ODJ5BxbP5d4c2Z5cGgtXAku59200Cx7diuHTOYfSBD8n6mm8A==}
     engines: {node: '>=16 || 14 >=14.17'}
 
+  mitt@3.0.1:
+    resolution: {integrity: sha512-vKivATfr97l2/QBCYAkXYDbrIWPM2IIKEl7YPhjCvKlG3kE2gm+uBo6nEXK3M5/Ffh/FLpKExzOQ3JJoJGFKBw==}
+
   mkdirp@1.0.4:
     resolution: {integrity: sha512-vVqVZQyf3WLx2Shd0qJ9xuvqgAyKPLAiqITEtqW0oIUjzo3PePDd6fW9iFz30ef7Ysp/oiWqbhszeGWW2T6Gzw==}
     engines: {node: '>=10'}
@@ -3905,6 +3914,17 @@ packages:
   react@19.2.3:
     resolution: {integrity: sha512-Ku/hhYbVjOQnXDZFv2+RibmLFGwFdeeKHFcOTlrt7xplBnya5OGn/hIRDsqDiSUcfORsDC7MPxwork8jBwsIWA==}
     engines: {node: '>=0.10.0'}
+
+  reactotron-core-client@2.10.0:
+    resolution: {integrity: sha512-mOzkc1Rb4sN98OLY/frkP0e1A60bTFjuXUgG8D4m+pwCcjVCWZupdSFV8c5+gqcZBnreoVR20/ko6D8X/7KPvg==}
+
+  reactotron-core-contract@0.4.0:
+    resolution: {integrity: sha512-o7m4mSzaUM/IGDc1dBfe0q6rgSi7mZCP7FCs3kHF7AJQwXBOKx/awjVaeNVqz+w6ADiw7X4dtDdQvEROAXdD3w==}
+
+  reactotron-react-native@5.2.0:
+    resolution: {integrity: sha512-7Jd47Eti4wvyn1p5MsQ4mEg2mGG8B5HIZHASjK5RKVfOajEP9Sf4Vume9URG6inB/UQWGpBP6ahCGqcSo4qn3w==}
+    peerDependencies:
+      react-native: '>=0.40.0'
 
   readable-stream@3.6.2:
     resolution: {integrity: sha512-9u/sniCrY3D5WdsERHzHE4G2YCXqoG5FTHUiCC4SIbr6XcLZBY05ya9EKjYek9O5xOAwjGq+1JdGBAS7Q9ScoA==}
@@ -9027,6 +9047,8 @@ snapshots:
 
   minipass@7.1.3: {}
 
+  mitt@3.0.1: {}
+
   mkdirp@1.0.4: {}
 
   ms@2.0.0: {}
@@ -9796,6 +9818,26 @@ snapshots:
       '@types/react': 19.2.2
 
   react@19.2.3: {}
+
+  reactotron-core-client@2.10.0:
+    dependencies:
+      reactotron-core-contract: 0.4.0
+
+  reactotron-core-contract@0.4.0: {}
+
+  reactotron-react-native@5.2.0(react-native@0.85.3(@babel/core@7.29.7)(@react-native/metro-config@0.85.3(@babel/core@7.29.7))(@types/react@19.2.15)(bufferutil@4.1.0)(react@19.2.3)(utf-8-validate@6.0.6)):
+    dependencies:
+      mitt: 3.0.1
+      react-native: 0.85.3(@babel/core@7.29.7)(@react-native/metro-config@0.85.3(@babel/core@7.29.7))(@types/react@19.2.15)(bufferutil@4.1.0)(react@19.2.3)(utf-8-validate@6.0.6)
+      reactotron-core-client: 2.10.0
+      reactotron-core-contract: 0.4.0
+
+  reactotron-react-native@5.2.0(react-native@0.85.3(@babel/core@7.29.7)(@react-native/metro-config@0.85.3(@babel/core@7.29.7))(@types/react@19.2.2)(bufferutil@4.1.0)(react@19.2.3)(utf-8-validate@6.0.6)):
+    dependencies:
+      mitt: 3.0.1
+      react-native: 0.85.3(@babel/core@7.29.7)(@react-native/metro-config@0.85.3(@babel/core@7.29.7))(@types/react@19.2.2)(bufferutil@4.1.0)(react@19.2.3)(utf-8-validate@6.0.6)
+      reactotron-core-client: 2.10.0
+      reactotron-core-contract: 0.4.0
 
   readable-stream@3.6.2:
     dependencies:

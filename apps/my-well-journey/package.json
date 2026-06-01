@@ -30,7 +30,8 @@
   },
   "devDependencies": {
     "@types/react": "*",
-    "typescript": "*"
+    "typescript": "*",
+    "reactotron-react-native": "*"
   },
   "scripts": {
     "start": "expo start",
