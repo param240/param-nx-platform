@@ -1,5 +1,5 @@
 import { useSignIn } from '@clerk/expo';
-import { Link } from 'expo-router';
+import { Link, useRouter } from 'expo-router';
 import { useState } from 'react';
 import {
   ActivityIndicator,
@@ -19,6 +19,7 @@ import { Colors, Spacing } from '@/constants/theme';
 export default function SignInScreen() {
   // Clerk v3 Signals API: { signIn, errors, fetchStatus }
   const { signIn, fetchStatus } = useSignIn();
+  const router = useRouter();
   const colorScheme = useColorScheme() ?? 'light';
   const colors = Colors[colorScheme === 'dark' ? 'dark' : 'light'];
 
@@ -49,9 +50,11 @@ export default function SignInScreen() {
     const finalizeResult = await signIn.finalize();
     if (finalizeResult.error) {
       setErrorMsg(finalizeResult.error.message ?? 'Sign in failed.');
+      return;
     }
-    // On success, ClerkProvider detects the new session and Stack.Protected
-    // automatically redirects to (main)
+    // Stack.Protected unlocks (main) but does NOT trigger navigation automatically.
+    // Explicit replace is required to move the user to the protected area.
+    router.replace('/');
   }
 
   return (

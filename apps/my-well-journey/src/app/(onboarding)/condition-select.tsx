@@ -1,4 +1,5 @@
 import { useUser } from '@clerk/expo';
+import { useRouter } from 'expo-router';
 import { useState } from 'react';
 import {
   ActivityIndicator,
@@ -93,6 +94,7 @@ function ConditionCard({
 
 export default function ConditionSelectScreen() {
   const { user } = useUser();
+  const router = useRouter();
   const [selected, setSelected] = useState<ConditionKey | null>(null);
   const [saving, setSaving] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
@@ -102,9 +104,15 @@ export default function ConditionSelectScreen() {
     setErrorMsg('');
     setSaving(true);
     try {
-      await user.update({ unsafeMetadata: { conditionKey: selected } });
-      // Navigation is automatic: useUser() update propagates → (main)/_layout.tsx
-      // re-renders → Redirect is no longer rendered → user lands on the main screen.
+      await user.update({
+        unsafeMetadata: {
+          ...user.unsafeMetadata, // preserve profileSetupDone and any other flags
+          conditionKey: selected,
+        },
+      });
+      // Explicit navigation required: (main)/_layout.tsx is unmounted after its
+      // <Redirect> fires, so it cannot re-render to remove the redirect on its own.
+      router.replace('/');
     } catch {
       setErrorMsg('Something went wrong. Please try again.');
       setSaving(false);
