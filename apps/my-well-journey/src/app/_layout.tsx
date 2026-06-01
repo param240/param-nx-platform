@@ -14,6 +14,7 @@ function RootLayoutNav() {
     <Stack screenOptions={{ headerShown: false }}>
       <Stack.Protected guard={isSignedIn}>
         <Stack.Screen name="(main)" />
+        <Stack.Screen name="(onboarding)" />
       </Stack.Protected>
       <Stack.Screen name="(auth)" />
     </Stack>
