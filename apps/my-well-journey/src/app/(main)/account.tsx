@@ -7,6 +7,19 @@ import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { BottomTabInset, MaxContentWidth, Spacing } from '@/constants/theme';
 
+const GENDER_LABELS: Record<string, string> = {
+  male: 'Male',
+  female: 'Female',
+  non_binary: 'Non-binary',
+  prefer_not_to_say: 'Prefer not to say',
+};
+
+const PROGRAM_LABELS: Record<string, string> = {
+  oncology: 'Cancer Care Companion',
+  diabetes: 'Diabetes Care Manager',
+  obesity_glp1: 'Weight Care Program',
+};
+
 function formatDate(date: Date | null | undefined): string {
   if (!date) return '—';
   return date.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' });
@@ -37,10 +50,17 @@ export default function AccountScreen() {
   const email = user.primaryEmailAddress?.emailAddress ?? '—';
   const userId = user.id ? `${user.id.slice(0, 8)}…` : '—';
 
+  const meta = (user.unsafeMetadata ?? {}) as Record<string, string>;
+  const dob     = meta.dateOfBirth || '—';
+  const gender  = GENDER_LABELS[meta.gender] ?? '—';
+  const phone   = meta.phone || '—';
+  const program = PROGRAM_LABELS[meta.conditionKey] ?? '—';
+
   return (
     <ThemedView style={styles.container}>
       <SafeAreaView style={styles.safeArea}>
         <ScrollView
+          style={styles.scroll}
           contentContainerStyle={[
             styles.scrollContent,
             Platform.OS !== 'web' && { paddingBottom: BottomTabInset + Spacing.four },
@@ -71,7 +91,24 @@ export default function AccountScreen() {
               </ThemedText>
             </ThemedView>
 
-            {/* Profile info card */}
+            {/* Profile card */}
+            <ThemedText type="small" themeColor="textSecondary" style={styles.sectionTitle}>
+              Profile
+            </ThemedText>
+            <ThemedView type="backgroundElement" style={styles.infoCard}>
+              <InfoRow label="Date of birth" value={dob} />
+              <ThemedView style={styles.divider} />
+              <InfoRow label="Gender" value={gender} />
+              <ThemedView style={styles.divider} />
+              <InfoRow label="Phone" value={phone} />
+              <ThemedView style={styles.divider} />
+              <InfoRow label="Program" value={program} />
+            </ThemedView>
+
+            {/* Account info card */}
+            <ThemedText type="small" themeColor="textSecondary" style={styles.sectionTitle}>
+              Account
+            </ThemedText>
             <ThemedView type="backgroundElement" style={styles.infoCard}>
               <InfoRow label="Member since" value={formatDate(user.createdAt)} />
               <ThemedView style={styles.divider} />
@@ -94,6 +131,10 @@ export default function AccountScreen() {
 const styles = StyleSheet.create({
   container: { flex: 1 },
   safeArea: { flex: 1, alignItems: 'center' },
+  scroll: {
+    // Override parent's alignItems: 'center' so ScrollView fills full width
+    alignSelf: 'stretch',
+  },
   scrollContent: {
     flexGrow: 1,
     paddingHorizontal: Spacing.four,
@@ -146,6 +187,11 @@ const styles = StyleSheet.create({
     height: StyleSheet.hairlineWidth,
     backgroundColor: 'rgba(128,128,128,0.2)',
     marginHorizontal: -Spacing.three,
+  },
+  sectionTitle: {
+    marginBottom: Spacing.one,
+    marginLeft: Spacing.one,
+    fontWeight: '500',
   },
   signOutButton: {
     paddingHorizontal: Spacing.four,
