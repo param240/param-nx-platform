@@ -22,7 +22,6 @@ workflows:
   # ── PR quality gate ────────────────────────────────────────────────────────
   pr-check:
     steps:
-      - activate-ssh-key@4: {}
       - git-clone@8: {}
       - script@1:
           title: Install pnpm and dependencies
@@ -38,7 +37,6 @@ workflows:
   # ── iOS build → TestFlight (internal) ─────────────────────────────────────
   build-ios:
     steps:
-      - activate-ssh-key@4: {}
       - git-clone@8: {}
       - script@1:
           title: Install pnpm and dependencies
@@ -70,7 +68,6 @@ workflows:
   # ── Android build → Firebase App Distribution (internal) ──────────────────
   build-android:
     steps:
-      - activate-ssh-key@4: {}
       - git-clone@8: {}
       - script@1:
           title: Install pnpm and dependencies
