@@ -8,9 +8,11 @@
     "scheme": "mywelljourney",
     "userInterfaceStyle": "automatic",
     "ios": {
+      "bundleIdentifier": "com.param.mywelljourney",
       "icon": "./assets/expo.icon"
     },
     "android": {
+      "package": "com.param.mywelljourney",
       "adaptiveIcon": {
         "backgroundColor": "#E6F4FE",
         "foregroundImage": "./assets/images/android-icon-foreground.png",
