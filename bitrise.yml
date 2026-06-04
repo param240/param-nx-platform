@@ -7,13 +7,17 @@ app:
 
 trigger_map:
   - push_branch: main
-    workflow: build-ios
-  - push_branch: main
-    workflow: build-android
+    workflow: build-all
   - pull_request_source_branch: "*"
     workflow: pr-check
 
 workflows:
+
+  # ── Trigger both mobile builds on push to main ─────────────────────────────
+  build-all:
+    after_run:
+      - build-ios
+      - build-android
 
   # ── PR quality gate ────────────────────────────────────────────────────────
   pr-check:
