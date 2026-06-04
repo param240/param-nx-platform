@@ -15,17 +15,6 @@ trigger_map:
 
 workflows:
 
-  # ── Shared anchor ──────────────────────────────────────────────────────────
-  _setup: &setup
-    - activate-ssh-key@4: {}
-    - git-clone@8: {}
-    - script@1:
-        title: Install pnpm and dependencies
-        inputs:
-          - content: |
-              npm install -g pnpm
-              pnpm install --frozen-lockfile
-
   # ── PR quality gate ────────────────────────────────────────────────────────
   pr-check:
     steps:
