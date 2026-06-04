@@ -85,7 +85,15 @@ workflows:
                   --platform android \
                   --profile preview \
                   --non-interactive \
-                  --wait \
+                  --wait
+      - script@1:
+          title: Download Android artifact
+          inputs:
+            - content: |
+                cd apps/my-well-journey
+                pnpm dlx eas-cli build:download \
+                  --platform android \
+                  --latest \
                   --output /tmp/app-preview.apk
       - firebase-app-distribution@0:
           title: Distribute to Firebase App Distribution
