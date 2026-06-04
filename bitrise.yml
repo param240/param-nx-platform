@@ -58,7 +58,7 @@ workflows:
           inputs:
             - content: |
                 cd apps/my-well-journey
-                npx eas-cli build \
+                pnpm dlx eas-cli build \
                   --platform ios \
                   --profile preview \
                   --non-interactive \
@@ -68,7 +68,7 @@ workflows:
           inputs:
             - content: |
                 cd apps/my-well-journey
-                npx eas-cli submit \
+                pnpm dlx eas-cli submit \
                   --platform ios \
                   --profile preview \
                   --non-interactive \
@@ -90,7 +90,7 @@ workflows:
           inputs:
             - content: |
                 cd apps/my-well-journey
-                npx eas-cli build \
+                pnpm dlx eas-cli build \
                   --platform android \
                   --profile preview \
                   --non-interactive \
