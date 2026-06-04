@@ -54,16 +54,17 @@ workflows:
                   --profile preview \
                   --non-interactive \
                   --wait
-      - script@1:
-          title: EAS Submit — TestFlight internal
-          inputs:
-            - content: |
-                cd apps/my-well-journey
-                pnpm dlx eas-cli submit \
-                  --platform ios \
-                  --profile preview \
-                  --non-interactive \
-                  --latest
+      # EAS Submit step — enable once ascAppId is set in eas.json
+      # - script@1:
+      #     title: EAS Submit — TestFlight internal
+      #     inputs:
+      #       - content: |
+      #           cd apps/my-well-journey
+      #           pnpm dlx eas-cli submit \
+      #             --platform ios \
+      #             --profile preview \
+      #             --non-interactive \
+      #             --latest
 
   # ── Android build → Firebase App Distribution (internal) ──────────────────
   build-android:
