@@ -1,7 +1,0 @@
-# CI/CD has moved to Bitrise.
-# See bitrise.yml at the repository root.
-#
-# Workflows:
-#   pr-check     — lint + typecheck on every PR
-#   build-ios    — EAS iOS build → TestFlight internal (on push to main)
-#   build-android — EAS Android build → Firebase App Distribution (on push to main)

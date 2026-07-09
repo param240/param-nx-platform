@@ -1,0 +1,51 @@
+name: EAS Update (OTA)
+
+# Publishes an over-the-air JS/asset update on every push to main —
+# but only when my-well-journey (or a lib it depends on) actually changed.
+# No native build, no EAS build credits consumed.
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - uses: expo/expo-github-action@v8
+        with:
+          eas-version: latest
+          token: ${{ secrets.EXPO_TOKEN }}
+          packager: pnpm
+
+      # Sets NX_BASE / NX_HEAD for affected detection
+      - uses: nrwl/nx-set-shas@v4
+
+      - name: Publish OTA update if app affected
+        env:
+          COMMIT_MSG: ${{ github.event.head_commit.message }}
+        run: |
+          # `nx show projects` emits a JSON array; parse with node (always present)
+          if pnpm nx show projects --affected --base=$NX_BASE --head=$NX_HEAD --json \
+            | node -e "let s='';process.stdin.on('data',d=>s+=d).on('end',()=>process.exit(JSON.parse(s).includes('my-well-journey')?0:1))"; then
+            echo "my-well-journey affected — publishing OTA update to 'preview' branch"
+            cd apps/my-well-journey
+            eas update --branch preview --message "$COMMIT_MSG" --non-interactive
+          else
+            echo "my-well-journey not affected — skipping OTA update"
+          fi

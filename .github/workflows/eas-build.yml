@@ -1,0 +1,55 @@
+name: EAS Build (Native)
+
+# Runs a native build on EAS servers. Triggered only on demand — never on
+# plain pushes — to conserve EAS build credits:
+#   * manually via the Actions tab (choose platform + profile), or
+#   * automatically when a v* tag is pushed (defaults: all platforms, production).
+# Uses --no-wait so the GitHub runner exits immediately instead of idling
+# while EAS compiles.
+
+on:
+  workflow_dispatch:
+    inputs:
+      platform:
+        description: Platform to build
+        type: choice
+        options: [all, ios, android]
+        default: all
+      profile:
+        description: Build profile
+        type: choice
+        options: [preview, production]
+        default: preview
+  push:
+    tags: ['v*']
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - uses: expo/expo-github-action@v8
+        with:
+          eas-version: latest
+          token: ${{ secrets.EXPO_TOKEN }}
+          packager: pnpm
+
+      - name: EAS Build
+        env:
+          PLATFORM: ${{ github.event.inputs.platform || 'all' }}
+          PROFILE: ${{ github.event.inputs.profile || 'production' }}
+        run: |
+          cd apps/my-well-journey
+          eas build --platform "$PLATFORM" --profile "$PROFILE" --non-interactive --no-wait

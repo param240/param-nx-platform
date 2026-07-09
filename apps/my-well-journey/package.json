@@ -17,6 +17,7 @@
     "expo-status-bar": "*",
     "expo-symbols": "*",
     "expo-system-ui": "*",
+    "expo-updates": "~56.0.21",
     "expo-web-browser": "*",
     "react": "*",
     "react-dom": "*",
@@ -30,8 +31,8 @@
   },
   "devDependencies": {
     "@types/react": "*",
-    "typescript": "*",
-    "reactotron-react-native": "*"
+    "reactotron-react-native": "*",
+    "typescript": "*"
   },
   "scripts": {
     "start": "expo start",
