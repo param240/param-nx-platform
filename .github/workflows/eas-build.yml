@@ -39,11 +39,13 @@ jobs:
 
       - run: pnpm install --frozen-lockfile
 
+      # Install eas-cli via npm (not pnpm): pnpm 11 errors on the blocked
+      # dtrace-provider build script when installing eas-cli globally.
       - uses: expo/expo-github-action@v8
         with:
           eas-version: latest
           token: ${{ secrets.EXPO_TOKEN }}
-          packager: pnpm
+          packager: npm
 
       - name: EAS Build
         env:
