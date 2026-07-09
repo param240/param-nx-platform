@@ -8,6 +8,7 @@ import { Stack } from 'expo-router';
 
 function RootLayoutNav() {
   const { isSignedIn, isLoaded } = useAuth();
+  console.log('Test Trivial update->1.0.0')
   console.log('isSignedIn', isSignedIn);
 
   // Keep splash screen until Clerk has restored the session
