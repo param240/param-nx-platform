@@ -4,6 +4,7 @@
   "license": "MIT",
   "scripts": {},
   "private": true,
+  "packageManager": "pnpm@11.1.3",
   "dependencies": {
     "@clerk/expo": "3.2.16",
     "@expo/ui": "56.0.14",
