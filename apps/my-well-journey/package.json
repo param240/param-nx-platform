@@ -6,6 +6,8 @@
     "@clerk/expo": "*",
     "@expo/ui": "*",
     "@param-nx-platform/core-ui": "workspace:*",
+    "expo": "~56.0.5",
+    "expo-build-properties": "~56.0.22",
     "expo-constants": "*",
     "expo-device": "*",
     "expo-font": "*",
@@ -38,8 +40,8 @@
   "scripts": {
     "start": "expo start",
     "reset-project": "node ./scripts/reset-project.js",
-    "android": "expo start --android",
-    "ios": "expo start --ios",
+    "android": "expo run:android",
+    "ios": "expo run:ios",
     "web": "expo start --web",
     "lint": "expo lint"
   },
