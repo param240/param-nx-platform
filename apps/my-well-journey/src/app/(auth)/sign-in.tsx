@@ -32,29 +32,45 @@ export default function SignInScreen() {
   async function handleSignIn() {
     setErrorMsg('');
 
-    // Step 1: identify the user
-    const createResult = await signIn.create({ identifier: email });
-    if (createResult.error) {
-      setErrorMsg(createResult.error.message ?? 'Sign in failed.');
-      return;
-    }
+    try {
+      // Step 1: identify the user
+      const createResult = await signIn.create({ identifier: email });
+      if (createResult.error) {
+        setErrorMsg(createResult.error.message ?? 'Sign in failed.');
+        return;
+      }
 
-    // Step 2: submit password as first factor
-    const passwordResult = await signIn.password({ password });
-    if (passwordResult.error) {
-      setErrorMsg(passwordResult.error.message ?? 'Incorrect password.');
-      return;
-    }
+      // Step 2: submit password as first factor
+      const passwordResult = await signIn.password({ password });
+      if (passwordResult.error) {
+        setErrorMsg(passwordResult.error.message ?? 'Incorrect password.');
+        return;
+      }
 
-    // Step 3: finalize — creates the session and updates auth state
-    const finalizeResult = await signIn.finalize();
-    if (finalizeResult.error) {
-      setErrorMsg(finalizeResult.error.message ?? 'Sign in failed.');
-      return;
+      // Step 3: only finalize once the sign-in is actually complete. If the
+      // password was accepted but the status is anything other than
+      // 'complete' (e.g. needs_second_factor when 2FA is enabled), no session
+      // exists yet and finalize() would THROW "Cannot finalize sign-in without
+      // a created session." This flow does not implement MFA, so surface the
+      // status instead of crashing.
+      if (signIn.status !== 'complete') {
+        setErrorMsg(`Additional step required: ${signIn.status}`);
+        return;
+      }
+
+      // finalize creates the session and updates auth state.
+      const finalizeResult = await signIn.finalize();
+      if (finalizeResult.error) {
+        setErrorMsg(finalizeResult.error.message ?? 'Sign in failed.');
+        return;
+      }
+
+      // Stack.Protected unlocks (main) but does NOT trigger navigation
+      // automatically. Explicit replace is required to move the user in.
+      router.replace('/');
+    } catch (err) {
+      setErrorMsg(err instanceof Error ? err.message : 'Sign in failed.');
     }
-    // Stack.Protected unlocks (main) but does NOT trigger navigation automatically.
-    // Explicit replace is required to move the user to the protected area.
-    router.replace('/');
   }
 
   return (
