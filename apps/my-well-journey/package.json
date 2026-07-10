@@ -5,6 +5,7 @@
   "dependencies": {
     "@clerk/expo": "*",
     "@expo/ui": "*",
+    "@param-nx-platform/core-ui": "workspace:*",
     "expo-constants": "*",
     "expo-device": "*",
     "expo-font": "*",

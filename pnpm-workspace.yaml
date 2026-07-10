@@ -1,6 +1,7 @@
 packages:
   - 'apps/*'
   - 'packages/*'
+  - 'packages/core/ui'
 allowBuilds:
   '@clerk/shared': true
   '@swc/core': true
@@ -10,5 +11,5 @@ allowBuilds:
   msgpackr-extract: false
   nx: true
   utf-8-validate: true
-nodeLinker: hoisted
+nodeLinker: 'hoisted'
 blockExoticSubdeps: false
