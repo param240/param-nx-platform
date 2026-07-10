@@ -13,3 +13,61 @@ allowBuilds:
   utf-8-validate: true
 nodeLinker: 'hoisted'
 blockExoticSubdeps: false
+
+# Force transitive (third-party) copies of these onto the single catalog
+# version too, so nothing forks them. Catalog governs our own manifests;
+# overrides governs the whole tree.
+overrides:
+  '@types/react': 'catalog:'
+  react-native-gesture-handler: 'catalog:'
+  react-native-web: 'catalog:'
+
+# Single source of truth for every dependency version in the workspace.
+# Apps and packages must reference these via the `catalog:` protocol instead of
+# declaring their own version, so no project can fork/override a version.
+catalog:
+  # --- runtime: react / react-native ---
+  react: 19.2.3
+  react-dom: 19.2.3
+  react-native: 0.85.3
+  react-native-gesture-handler: 2.31.1
+  react-native-reanimated: 4.3.1
+  react-native-safe-area-context: 5.7.0
+  react-native-screens: 4.25.2
+  react-native-web: 0.21.0
+  react-native-worklets: 0.8.3
+
+  # --- expo ---
+  expo: 56.0.5
+  expo-build-properties: 56.0.22
+  expo-constants: 56.0.16
+  expo-device: 56.0.4
+  expo-font: 56.0.5
+  expo-glass-effect: 56.0.4
+  expo-image: 56.0.9
+  expo-linking: 56.0.12
+  expo-router: 56.2.7
+  expo-secure-store: 56.0.4
+  expo-splash-screen: 56.0.10
+  expo-status-bar: 56.0.4
+  expo-symbols: 56.0.5
+  expo-system-ui: 56.0.5
+  expo-updates: 56.0.21
+  expo-web-browser: 56.0.5
+  '@expo/ui': 56.0.14
+
+  # --- auth ---
+  '@clerk/expo': 3.2.16
+
+  # --- tooling / types ---
+  '@nx/js': 22.7.2
+  '@swc-node/register': 1.11.1
+  '@swc/core': 1.15.8
+  '@swc/helpers': 0.5.18
+  '@types/node': 20.19.9
+  '@types/react': 19.2.2
+  nx: 22.7.2
+  prettier: 3.8.1
+  reactotron-react-native: 5.2.0
+  tslib: 2.8.1
+  typescript: 6.0.3
