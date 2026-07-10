@@ -205,6 +205,8 @@ importers:
         specifier: '*'
         version: 6.0.3
 
+  packages/core/config: {}
+
   packages/core/ui:
     devDependencies:
       '@expo/ui':

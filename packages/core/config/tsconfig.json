@@ -4,7 +4,11 @@
     "rootDir": "src",
     "outDir": "dist",
     "declaration": true,
-    "noEmit": true
+    "noEmit": true,
+    // Consumed as source by Metro (a bundler), so use bundler-style
+    // resolution instead of the workspace-default nodenext.
+    "module": "esnext",
+    "moduleResolution": "bundler"
   },
   "include": ["src/**/*.ts"]
 }
